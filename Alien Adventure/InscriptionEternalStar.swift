@@ -9,8 +9,18 @@
 extension Hero {
     
     func inscriptionEternalStar(inventory: [UDItem]) -> UDItem? {
-        return nil
+        var eternalStar : UDItem?
+        for item in inventory {
+            if let subtext = item.inscription?.contains("THE ETERNAL STAR") {
+                eternalStar = item
+            } else {
+                return nil
+            }
+        }
+       return eternalStar
     }
+
+    
 }
 
 // If you have completed this function and it is working correctly, feel free to skip this part of the adventure by opening the "Under the Hood" folder, and making the following change in Settings.swift: "static var RequestsToSkip = 3"

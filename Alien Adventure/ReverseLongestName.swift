@@ -12,7 +12,7 @@ extension Hero {
         
         var longestName = ""
         for item in inventory {
-            if name!.characters.count>longestName.characters.count {
+            if item.name.characters.count>longestName.characters.count {
             longestName = String(item.name.characters.reversed())
             }
         }
