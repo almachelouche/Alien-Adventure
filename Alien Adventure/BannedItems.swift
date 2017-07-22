@@ -7,11 +7,27 @@
 //
 
 import Foundation
-
+let dataFileURL = Bundle.main.url(forResource: "dataFile", withExtension: "plist")!
+let LaserDictionary = NSArray(contentsOf: dataFileURL) as! [[String: Any]]
 extension Hero {
     
-    func bannedItems(dataFile: String) -> [Int] {
-        return [Int]()
+        func bannedItems(dataFile: String) -> [Int] {
+        
+                var bannedItemsFromPlanet = [Int]()
+        for item in LaserDictionary {
+            if let laserSearch = item["Name"] as? String  {
+                if laserSearch.contains("laser") {
+                    let laserHistoricalDate = item["HistoricalData"] as! [String: AnyObject]
+                    if let carbonAge = laserHistoricalDate["carbonAge"] as? Int {
+                        if carbonAge<30 {
+                        bannedItemsFromPlanet.append(item["baseValue"] as! Int)
+                    }
+                    }
+                }
+            }
+        }
+        
+        return bannedItemsFromPlanet
     }
 }
 
