@@ -1,3 +1,4 @@
+
 //
 //  BannedItems.swift
 //  Alien Adventure
@@ -7,21 +8,29 @@
 //
 
 import Foundation
-let dataFileURL = Bundle.main.url(forResource: "dataFile", withExtension: "plist")!
-let LaserDictionary = NSArray(contentsOf: dataFileURL) as! [[String: Any]]
+
 extension Hero {
     
-        func bannedItems(dataFile: String) -> [Int] {
-        
-                var bannedItemsFromPlanet = [Int]()
+    func bannedItems(dataFile: String) -> [Int] {
+        let dataFileURL = Bundle.main.url(forResource: dataFile, withExtension: "plist")!
+        let LaserDictionary = NSArray(contentsOf: dataFileURL) as! [[String: Any]]
+        print(LaserDictionary)
+        var bannedItemsFromPlanet = [Int]()
+        var laserItems = [String]()
         for item in LaserDictionary {
             if let laserSearch = item["Name"] as? String  {
-                if laserSearch.contains("laser") {
+                if laserSearch.contains("Laser") {
+                    laserItems.append(laserSearch)
+                    print (laserItems)
+                
                     let laserHistoricalDate = item["HistoricalData"] as! [String: AnyObject]
                     if let carbonAge = laserHistoricalDate["carbonAge"] as? Int {
-                        if carbonAge<30 {
-                        bannedItemsFromPlanet.append(item["baseValue"] as! Int)
-                    }
+                        if carbonAge<30  {
+                            bannedItemsFromPlanet.append(item["ItemID"] as! Int)
+                            
+                            print(bannedItemsFromPlanet)
+                        
+                        }
                     }
                 }
             }
