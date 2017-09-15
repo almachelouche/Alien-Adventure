@@ -24,7 +24,7 @@ extension Hero {
                     print (laserItems)
                 
                     let laserHistoricalDate = item["HistoricalData"] as! [String: AnyObject]
-                    if let carbonAge = laserHistoricalDate["carbonAge"] as? Int {
+                    if let carbonAge = laserHistoricalDate["CarbonAge"] as? Int {
                         if carbonAge<30  {
                             bannedItemsFromPlanet.append(item["ItemID"] as! Int)
                             

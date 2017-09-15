@@ -9,12 +9,12 @@
 extension Hero {
     
     func inscriptionEternalStar(inventory: [UDItem]) -> UDItem? {
-        var eternalStar : UDItem?
+        var eternalStar : UDItem? = nil
+        var inscription : Bool
         for item in inventory {
             if let subtext = item.inscription?.contains("THE ETERNAL STAR") {
+                inscription = subtext
                 eternalStar = item
-            } else {
-                return nil
             }
         }
        return eternalStar
