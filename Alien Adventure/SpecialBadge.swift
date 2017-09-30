@@ -23,7 +23,7 @@ class SpecialBadge: Badge {
         case rotate = 1
         case shake = 2
     }
-    func animation(animate :BadgeAnimation)-> SKAction? {
+    func animation(animate :BadgeAnimation){
         switch animate {
         case .growAndShrink:
   
@@ -31,11 +31,11 @@ class SpecialBadge: Badge {
         let action2 = SKAction.scale(to: 1.1, duration: 1.0)
         let sequencedAction = SKAction.sequence([action1, action2])
         run(SKAction.repeatForever(sequencedAction))
-           return sequencedAction
+           break
         case .rotate :
             let action = SKAction.rotate(byAngle: CGFloat(-M_PI), duration: 1.5)
             run(SKAction.repeatForever(action))
-            return action
+            break
         case .shake :
         let x: Float = 10
         let y: Float = 6
@@ -51,19 +51,15 @@ class SpecialBadge: Badge {
         }
         let sequencedAction = SKAction.sequence(actionsArray)
         run(SKAction.repeatForever(sequencedAction))
-        return sequencedAction
         }
+    
+        let animationType = Int(arc4random_uniform(3))
+        animation(animate: BadgeAnimation(rawValue: animationType)!)
     }
     
-        func testBadgeAnimation() {
-            let animationNumber = Int(arc4random_uniform(3))
-            let skType = animation(animate: BadgeAnimation(rawValue: animationNumber)!)
-            run(SKAction.repeatForever(skType!))
-    }
-    
-    
-
 }
+
+
 
 
 
